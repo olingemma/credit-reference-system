@@ -13,8 +13,13 @@ const loanSchema= new mongoose.Schema({
     repaymentSchedule:{
         type:'String',
         required:true,
-        enum:['6 months','1 year','2 years','3 years']
+        enum:['days','months','years']
     },
+    period:{
+        type:Number,
+        required:[true,'Please provide the time period']
+    }
+    ,
     status:{
         type:String,
         default:'pending',

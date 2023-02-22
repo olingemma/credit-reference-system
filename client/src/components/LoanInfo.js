@@ -59,7 +59,7 @@ export default function LoanInfo({id,date,lastName,interest,principle,moneyBack,
               onClick={status==='pending'?handleGiveMoney:handleDisburse}
               disabled={isLoading}
             >
-              {status==='pending'?'Disburse':'Clear'}
+              {status==='pending'?'Disburse':'Repay'}
             </button>
               <button type='button' className='btn delete-btn' onClick={status==='pending'?handleReject:handleWriteOff} disabled={isLoading}>{status==='pending'?'reject':'write off'}</button>
             </footer>

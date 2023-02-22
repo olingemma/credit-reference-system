@@ -82,6 +82,7 @@ const initialState= {
     interestRate:0,
     status:'pending',
     repaymentSchedule:'',
+    period:0,
     stats:{},
     monthlyApplications:[],
     search:'',
@@ -293,13 +294,13 @@ const AppProvider= ({children})=>{
     const createLoan=async()=>{
         dispatch({type:CREATE_LOAN_START})
         try{
-            const {principle,repaymentSchedule,interestRate,clientId,client_nin}= state
+            const {principle,period,repaymentSchedule,interestRate,clientId,client_nin}= state
             let client_id=clientId
             await authFetch.post('/loan',{
                 principle,
                 repaymentSchedule,
                 interestRate,
-                
+                period,
                 client_id,
                 client_nin
             })

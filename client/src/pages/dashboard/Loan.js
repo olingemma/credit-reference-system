@@ -3,7 +3,7 @@ import {FormRow,Alert, FormRowSelect} from '../../components'
 import { useAppContext } from '../../context/appContext'
 import Wrapper from '../../assets/wrappers/DashboardFormPage';
 import { Navigate } from 'react-router-dom';
-const repaymentSchedule_list= ['Select schedule','6 months','1 year','2 years','3 years'];
+const repaymentSchedule_list= ['Select schedule','days','months','years'];
 export default function Loan() {
   
     const {
@@ -15,6 +15,7 @@ export default function Loan() {
   handleLoanChange,
   principle,
   interestRate,
+  period,
   repaymentSchedule,
   createLoan,
   displayAlert,
@@ -29,7 +30,7 @@ export default function Loan() {
 
     const handleSubmit= (e)=>{
       e.preventDefault()
-     if(!principle||!repaymentSchedule||!interestRate){
+     if(!principle||!repaymentSchedule||!interestRate||!period){
         displayAlert()
         clearAlert()
         return
@@ -80,6 +81,14 @@ export default function Loan() {
             name="repaymentSchedule"
             list={repaymentSchedule_list}
             value={repaymentSchedule}
+            handleChange={handleClientInput}
+          />
+
+          <FormRow
+            type='number'
+            labelText={'Period'}
+            name='period'
+            value={period}
             handleChange={handleClientInput}
           />
 

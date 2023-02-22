@@ -33,24 +33,44 @@ const Client = ({
 
     
     let allLoans=loans.map(item=>{
-      return {c_nin:item.client_nin,status:item.status}
+      return {c_nin:item.client_nin,status:item.status,principle:item.principle}
     })
     console.log("nin loans",allLoans);
     let clientLoans= allLoans.filter(loan=>{
       return loan.c_nin===nin
     })
-    let completed= clientLoans.filter(loan=>{
-      return loan.status==='completed'
-    }).length
-    let defaulted=clientLoans.filter(item=>{
-      return item.status==='defaulted'
-    }).length
     
-    const total= completed+defaulted
+
+    let clearedTotal=clientLoans.map((item)=>{
+      return {principle:item.principle,status:item.status}
+    }).filter((item)=>{
+      return item.status==='completed'
+    }).reduce((acc,principle)=>{
+      const total= acc+principle.principle 
+      return total
+    },0)
+
+    let defaultedTotal=clientLoans.map((item)=>{
+      return {principle:item.principle,status:item.status}
+    }).filter((item)=>{
+      return item.status==='defaulted'
+    }).reduce((acc,principle)=>{
+      const total= acc+principle.principle 
+      return total
+    },0)
+
+    const allPrinciples=clearedTotal+defaultedTotal
+
+    console.log('cleared',{cleared:clearedTotal,defaulted:defaultedTotal})
+
+    const percentage= (clearedTotal/allPrinciples)*100
+
+    
+    
     let creditScore
-    const score= (completed/total)*100
+    
     if(allLoans){
-      creditScore=Math.round(score)
+      creditScore=Math.round(percentage)
     }else{
       creditScore= 'new'
     }

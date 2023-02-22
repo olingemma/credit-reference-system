@@ -56,31 +56,17 @@ export default function Client() {
         return <Navigate to={'/all-clients'}/>
     }   
 
-    function calculate(interest,principle,schedule){
-        let rp
-        if(schedule==='6 months'){
-            rp=6
-        }else if(schedule==='1 year'){
-            rp=12
-        }else if(schedule==='2 years'){
-            rp=24
-        }else if(schedule==='3years'){
-            rp=36
-        }
-
-        let monthlyHarrier= principle/rp
-
-        let ir= interest/100;
-
-        let mp= ir*monthlyHarrier
-
-        return Math.round( mp+monthlyHarrier)
+    function calculate(interest,principle){
+        let rate= interest/100
+        let i= principle*rate
+        let total= principle+i
+        return Math.round( total)
     }
 
     function handleHistory(){
         setShowHistory(!showHistory)
     }
-    // let monthlyPayment= calculate(clientLoans[1].interestRate,clientLoans[1].principle,clientLoans[1].repaymentSchedule)
+
     
     if(isLoading){
             return(
@@ -125,7 +111,7 @@ export default function Client() {
                         date={getDate(loan.createdAt)}
                         principle={currencyFormatter.format(loan.principle,{locale:'UGX'})}
                         interest={loan.interestRate}
-                        schedule={loan.repaymentSchedule}
+                        schedule={`${loan.period} ${loan.repaymentSchedule}`}
                         status={loan.status}
                         disburse={'disburse'}
                         moneyBack={currencyFormatter.format(calculate(loan.interestRate,loan.principle,loan.repaymentSchedule),{locale:'UGX'})}
@@ -137,7 +123,7 @@ export default function Client() {
               <div>
                 {
                    allLoans.length<1?<h1>No history...</h1>:( allLoans.map(item=>{
-                        return <History principle={currencyFormatter.format(item.principle,{locale:'UGX'})+' ugx'} repaymentSchedule={item.repaymentSchedule} status={item.status} date={getDate(item.createdAt)}/>
+                        return <History principle={currencyFormatter.format(item.principle,{locale:'UGX'})+' ugx'} repaymentSchedule={`${item.period} ${item.repaymentSchedule}`} status={item.status} date={getDate(item.createdAt)}/>
                     }))
                 }
               </div>

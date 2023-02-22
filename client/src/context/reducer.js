@@ -215,7 +215,7 @@ const reducer = (state,action)=>{
             isLoading:false,
             alertType:'success',
             showAlert:true,
-            alertText:"Client successfully applied for loan!",
+            alertText:"Loan successfully created!",
             client_nin:''
         }
     }
@@ -291,7 +291,7 @@ const reducer = (state,action)=>{
     }
 
     if(action.type===DISBURSE_LOAN_START){
-        return {...state,isLoading:true}
+        return {...state}
     }
     if(action.type===DISBURSE_LOAN_SUCESS){
         return {
@@ -299,7 +299,7 @@ const reducer = (state,action)=>{
             isLoading:false,
             alertType:'success',
             showAlert:true,
-            alertText:"Client successfully cleared from loan!"
+            alertText:"Success, reload to see your client's loan status!"
         }
     }
     if(action.type===WRITE_OFF_START){
@@ -315,7 +315,7 @@ const reducer = (state,action)=>{
         }
     }
     if(action.type===GIVE_MONEY_START){
-        return {...state,isLoading:true}
+        return {...state}
     }
     if(action.type===GIVE_MONEY_SUCCESS){
         return {
@@ -323,11 +323,11 @@ const reducer = (state,action)=>{
             isLoading:false,
             alertType:'success',
             showAlert:true,
-            alertText:"Client successfully disbursed loan!"
+            alertText:"Success, status may take up to two minutes to update!"
         }
     }
         if(action.type===REJECT_LOAN_START){
-        return {...state,isLoading:true}
+        return {...state}
     }
     if(action.type===REJECT_LOANL_SUCCESS){
         return {
@@ -335,7 +335,7 @@ const reducer = (state,action)=>{
             isLoading:false,
             alertType:'success',
             showAlert:true,
-            alertText:"Client has been rejected loan!"
+            alertText:"Loan rejected, status may take up to two mintues to update!"
         }
     }
 

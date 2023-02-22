@@ -93,6 +93,7 @@ const updateLoan= async(req,res)=>{
         throw new NotFoundError(`No loan with this id :${id}`)
     }
 
+    
     let updated=await Loan.findOneAndUpdate({_id:id},{status:name})
 
     // console.log(updated.modifiedCount)
