@@ -13,6 +13,8 @@ export default function History({principle,repaymentSchedule,status,date}) {
         icon=<MdPending style={{color:'blue'}}/>
     }else if(status==='rejected'){
         icon=<GiCancel styled={{color:'orange'}}/>
+    }else if(status==='written-off'){
+        icon=<GiCancel styled={{color:'orange'}}/>
     }else{
         icon=<FcApproval/>
     }

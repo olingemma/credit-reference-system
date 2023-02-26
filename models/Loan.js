@@ -23,7 +23,7 @@ const loanSchema= new mongoose.Schema({
     status:{
         type:String,
         default:'pending',
-        enum:['completed','rejected','active','pending','defaulted']
+        enum:['completed','rejected','active','pending','defaulted','written-off']
     },
     client_id:{
         type:mongoose.Types.ObjectId,

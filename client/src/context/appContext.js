@@ -42,7 +42,9 @@ import {
     DISBURSE_LOAN_START,
     DISBURSE_LOAN_SUCESS,
     WRITE_OFF_START,
-    WRITE_OFF_SUCESS
+    WRITE_OFF_SUCESS,
+    DEFAULT_START,
+    DEFAULT_SUCCESS
 } from "./actions";
 
 import reducer from "./reducer";
@@ -377,11 +379,22 @@ const AppProvider= ({children})=>{
         }
         clearAlert();
     }
-        const writeOff=async(id)=>{
+    const writeOff=async(id)=>{
         dispatch({type:WRITE_OFF_START})
         try{
-            await authFetch.patch(`/loan/${id}?status=defaulted`)
+            await authFetch.patch(`/loan/${id}?status=written-off`)
             dispatch({type:WRITE_OFF_SUCESS});
+        }catch(err){
+            console.log(err)
+        }
+        clearAlert();
+    }
+
+    const defaultLoan=async(id)=>{
+        dispatch({type:DEFAULT_START})
+        try{
+            await authFetch.patch(`/loan/${id}?status=defaulted`)
+            dispatch({type:DEFAULT_SUCCESS});
         }catch(err){
             console.log(err)
         }
@@ -411,7 +424,7 @@ const AppProvider= ({children})=>{
 
 
 
-    return <AppContext.Provider value={{...state,reject,giveMoney,writeOff,disburse,clearClient,getSingleClient,changePage,clearFilters,showStats,getIndividualLoans,deleteClient,createLoan,handleLoanChange,cancelLoan,applyForLoan,getClients,createClient,handleChange,clearValues,updateUser,logoutUser,loginUser,toggleSidebar,displayAlert,registerUser}}>{children}</AppContext.Provider>
+    return <AppContext.Provider value={{...state,defaultLoan,reject,giveMoney,writeOff,disburse,clearClient,getSingleClient,changePage,clearFilters,showStats,getIndividualLoans,deleteClient,createLoan,handleLoanChange,cancelLoan,applyForLoan,getClients,createClient,handleChange,clearValues,updateUser,logoutUser,loginUser,toggleSidebar,displayAlert,registerUser}}>{children}</AppContext.Provider>
 }
 
 const useAppContext=()=>{

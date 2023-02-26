@@ -7,7 +7,7 @@ import {GrStatusInfo} from 'react-icons/gr';
 import { useAppContext } from '../context/appContext';
 
 export default function LoanInfo({id,date,lastName,interest,principle,moneyBack,status,schedule}) {
-  const {isLoading,disburse,writeOff,giveMoney,reject}= useAppContext()
+  const {isLoading,disburse,writeOff,giveMoney,defaultLoan,reject}= useAppContext()
   const handleDisburse=()=>{
     disburse(id)
   }
@@ -53,15 +53,16 @@ export default function LoanInfo({id,date,lastName,interest,principle,moneyBack,
                 <ClientInfo icon={<AiOutlinePercentage/>} text={interest}/>
             </div>
             <footer>
-            <button
-              type='button'
-              className='btn edit-btn'
-              onClick={status==='pending'?handleGiveMoney:handleDisburse}
-              disabled={isLoading}
-            >
-              {status==='pending'?'Disburse':'Repay'}
-            </button>
+              <button
+                type='button'
+                className='btn edit-btn'
+                onClick={status==='pending'?handleGiveMoney:handleDisburse}
+                disabled={isLoading}
+              >
+                {status==='pending'?'Disburse':'Repay'}
+              </button>
               <button type='button' className='btn delete-btn' onClick={status==='pending'?handleReject:handleWriteOff} disabled={isLoading}>{status==='pending'?'reject':'write off'}</button>
+              {status==="active"&&<button type='button' style={{marginLeft:"10px"}} onClick={defaultLoan} className='btn delete-btn'>Default</button>}
             </footer>
         </div>
     </Wrapper>
