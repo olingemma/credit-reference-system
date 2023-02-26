@@ -381,7 +381,7 @@ const AppProvider= ({children})=>{
     const writeOff=async(id)=>{
         dispatch({type:WRITE_OFF_START})
         try{
-            await authFetch.patch(`/loan/${id}?status=written-off`)
+            await authFetch.patch(`/loan/${id}?status=written_off`)
             dispatch({type:WRITE_OFF_SUCESS});
         }catch(err){
             console.log(err)

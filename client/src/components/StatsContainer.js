@@ -1,10 +1,12 @@
 import { useAppContext } from "../context/appContext"
 import StatItem from "./StatItem"
 import { FaSuitcaseRolling,FaCalendarCheck,FaBug } from "react-icons/fa"
+import {TfiWrite} from 'react-icons/tfi'
 import Wrapper from "../assets/wrappers/StatsContainer";
 
 export default function StatsContainer() {
     const {stats}= useAppContext();
+    
     const defaultStats=[
         {
             title:'pending loans',
@@ -26,6 +28,13 @@ export default function StatsContainer() {
             icon:<FaBug/>,
             color:'#d66a6a',
             bcg:'#ffeeee'
+        },
+        {
+            title:'Written off',
+            count:stats.written_off||0,
+            icon:<TfiWrite/>,
+            color:"#000000",
+            bcg:"#706D6D"
         }
     ]
   return (

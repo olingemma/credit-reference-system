@@ -43,7 +43,8 @@ const showStats= async(req,res)=>{
     const defaultStats={
         pending:stats.pending||0,
         completed:stats.completed||0,
-        defaulted:stats.defaulted||0
+        defaulted:stats.defaulted||0,
+        written_off:stats.written_off||0
     }
 
     let monthlyApplications=await Loan.aggregate([
